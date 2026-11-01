@@ -1,0 +1,401 @@
+[
+  {
+    "scenario": "test_any_time_clears_earliest",
+    "expected": "Explicit any-time correction removes old earliest constraint.",
+    "actual": "Assertions passed; state=choosing; bookings=0; proposal=none; error=None",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_bookings_visible_in_new_errand",
+    "expected": "One booked receipt remains visible in another errand.",
+    "actual": "Assertions passed; state=completed; bookings=1; proposal=book; error=None",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_cancel_retries",
+    "expected": "Cancellation needs approval, retries initial 503 once and ends cancelled.",
+    "actual": "Assertions passed; state=completed; bookings=1; proposal=cancel; error=None",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_cancel_retry_exhaustion",
+    "expected": "Repeated 503 produces error while original booking stays booked.",
+    "actual": "Assertions passed; state=choosing; bookings=1; proposal=none; error='Provider did not complete the action: error'",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_chat_cancel_prepares_approval",
+    "expected": "User cancellation chat prepares cancel ticket without mutation.",
+    "actual": "Assertions passed; state=awaiting_approval; bookings=1; proposal=cancel; error=None",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_chat_reschedule_prepares_approval",
+    "expected": "Move-to-Saturday chat prepares reschedule ticket.",
+    "actual": "Assertions passed; state=awaiting_approval; bookings=1; proposal=reschedule; error=None",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_collects_missing",
+    "expected": "Plumber maps to plumbing and creates no booking.",
+    "actual": "Assertions passed; state=collecting; bookings=0; proposal=none; error=None",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_completed_operation_reconstructs_receipt",
+    "expected": "Recovery rebuilds final receipt from completed durable operation.",
+    "actual": "Assertions passed; state=completed; bookings=1; proposal=book; error=None",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_cross_session_approval_rejected",
+    "expected": "A proposal from another session cannot be approved.",
+    "actual": "Assertions passed; state=collecting; bookings=0; proposal=none; error='That approval is stale. Review the current exact ticket.'",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_distinct_holds_cannot_double_book_provider_slot",
+    "expected": "Two holds/keys cannot book one provider slot; occupied availability disappears.",
+    "actual": "Assertions passed; state=collecting; bookings=1; proposal=none; error=None",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_edit_invalidates",
+    "expected": "Budget edit invalidates the prior approval.",
+    "actual": "Assertions passed; state=choosing; bookings=0; proposal=none; error='That approval is stale. Review the current exact ticket.'",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_empty_area_rejected",
+    "expected": "Whitespace area returns validation error.",
+    "actual": "Assertions passed; state=collecting; bookings=0; proposal=none; error='Facts cannot contain blank text.'",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_engine_model_limit",
+    "expected": "Zero interpreter budget rejects chat with user error.",
+    "actual": "Assertions passed; state=collecting; bookings=0; proposal=none; error='This turn reached its interpreter or wall-clock limit. Please try again.'",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_engine_wall_limit",
+    "expected": "Zero wall budget rejects search with user error.",
+    "actual": "Assertions passed; state=collecting; bookings=0; proposal=none; error='This turn reached its execution limit. No further action was taken.'",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_equivalent_slot_encodings_cannot_bypass_occupancy",
+    "expected": "UTC and zero-fraction ISO variants of occupied instant all conflict and preserve original slot.",
+    "actual": "Assertions passed; state=collecting; bookings=2; proposal=none; error=None",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_fixed_provider_contract",
+    "expected": "Eight-tool contract supplies providers/details/quote, idempotent booking and status.",
+    "actual": "Assertions passed; state=collecting; bookings=1; proposal=none; error=None",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_forget_preserves_pending_recovery",
+    "expected": "Forgetting memory does not prevent durable approved-operation recovery.",
+    "actual": "Assertions passed; state=completed; bookings=1; proposal=book; error=None",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_hold_expiry",
+    "expected": "Expired ten-minute hold cannot execute.",
+    "actual": "Assertions passed; state=awaiting_approval; bookings=0; proposal=none; error='The ten-minute hold expired. Select a fresh slot and approve again.'",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_http_transport_guards",
+    "expected": "State GET succeeds; external Origin receives 403; traversal receives 404.",
+    "actual": "Assertions passed; state=collecting; bookings=0; proposal=none; error=None",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_inferred_needs_confirmation",
+    "expected": "Inferred preference remains unconfirmed and is not inherited.",
+    "actual": "Assertions passed; state=collecting; bookings=0; proposal=none; error=None",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_injection_ignored",
+    "expected": "Provider injection text is present as data and causes no booking.",
+    "actual": "Assertions passed; state=awaiting_approval; bookings=0; proposal=book; error=None",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_invalid_event_message",
+    "expected": "Unknown event returns error and assistant message.",
+    "actual": "Assertions passed; state=collecting; bookings=0; proposal=none; error='Unsupported event.'",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_limit",
+    "expected": "Configured exhaustion produces a user-visible failure.",
+    "actual": "Assertions passed; state=choosing; bookings=0; proposal=none; error='Provider did not complete the action: budget_exhausted'",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_memory_forget",
+    "expected": "Confirmed area inherits, then forget removes inherited active fact.",
+    "actual": "Assertions passed; state=collecting; bookings=0; proposal=none; error=None",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_memory_set_validates_time",
+    "expected": "99:99 memory is rejected.",
+    "actual": "Assertions passed; state=collecting; bookings=0; proposal=none; error='Earliest time must be HH:MM.'",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_missing_fact_conversation",
+    "expected": "Four natural user messages fill missing facts and reach choosing.",
+    "actual": "Assertions passed; state=choosing; bookings=0; proposal=none; error=None",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_mutated_hold_rejected",
+    "expected": "Actual durable held-price mutation invalidates approval before booking.",
+    "actual": "Assertions passed; state=awaiting_approval; bookings=0; proposal=none; error='The held price or slot changed. Review a fresh ticket before approval.'",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_next_week_slots_match_request",
+    "expected": "Next-week availability occurs seven days from local current day.",
+    "actual": "Assertions passed; state=choosing; bookings=0; proposal=none; error=None",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_not_before_dotted_time",
+    "expected": "Not-before dotted a.m. syntax maps to exact earliest time.",
+    "actual": "Assertions passed; state=choosing; bookings=0; proposal=none; error=None",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_optional_fact_clear",
+    "expected": "Explicit null removes optional earliest time and technician facts.",
+    "actual": "Assertions passed; state=choosing; bookings=0; proposal=none; error=None",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_other_prepared_approval_blocked_while_pending",
+    "expected": "A pre-existing proposal in another session cannot execute during unresolved operation.",
+    "actual": "Assertions passed; state=awaiting_approval; bookings=0; proposal=book; error='Recover the pending operation before starting another action.'",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_preferred_technician_constraint",
+    "expected": "Search offers only the exact named technician.",
+    "actual": "Assertions passed; state=choosing; bookings=0; proposal=none; error=None",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_price_change",
+    "expected": "Ticket uses held quote rather than search price and approves exact higher quote.",
+    "actual": "Assertions passed; state=completed; bookings=1; proposal=book; error=None",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_quote_over_budget_rejected",
+    "expected": "A held quote over budget creates no approval proposal.",
+    "actual": "Assertions passed; state=choosing; bookings=0; proposal=none; error='The exact held quote exceeds your budget. Increase the budget or choose another provider.'",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_receipt_booking_id",
+    "expected": "Completed proposal receipt contains authoritative booking ID.",
+    "actual": "Assertions passed; state=completed; bookings=1; proposal=book; error=None",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_repeat_is_idempotent",
+    "expected": "Repeated exact approval results in one booking.",
+    "actual": "Assertions passed; state=completed; bookings=1; proposal=book; error=None",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_reschedule_actual_occupied_slot_preserves_original",
+    "expected": "Actual occupied target returns conflict and leaves original booking unchanged.",
+    "actual": "Assertions passed; state=collecting; bookings=2; proposal=none; error=None",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_reschedule_conflict",
+    "expected": "Configured slot conflict preserves original booking slot.",
+    "actual": "Assertions passed; state=choosing; bookings=1; proposal=none; error='Provider did not complete the action: slot_conflict'",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_reschedule_proposal_canonicalizes_offset",
+    "expected": "Reschedule ticket normalizes equivalent aware ISO timestamp to +05:30 canonical slot.",
+    "actual": "Assertions passed; state=awaiting_approval; bookings=1; proposal=reschedule; error=None",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_restart_pending",
+    "expected": "Reopening real SQLite after provider commit recovers exactly one booking.",
+    "actual": "Assertions passed; state=completed; bookings=1; proposal=book; error=None",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_single_interpreter_turn",
+    "expected": "One chat produces exactly one interpreter event.",
+    "actual": "Assertions passed; state=choosing; bookings=0; proposal=none; error=None",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_slot_taken",
+    "expected": "Taken slot produces no booking.",
+    "actual": "Assertions passed; state=choosing; bookings=0; proposal=none; error='Provider did not complete the action: slot_taken'",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_slot_unavailable",
+    "expected": "Unavailable hold produces user error.",
+    "actual": "Assertions passed; state=choosing; bookings=0; proposal=none; error='That slot is unavailable. Choose another provider or slot.'",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_slow_mutation_reconciles_before_replacement",
+    "expected": "Slow mutation returns within deadline, blocks replacement, then reconciles one late booking.",
+    "actual": "Assertions passed; state=completed; bookings=1; proposal=book; error=None",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_slow_read_hard_deadline",
+    "expected": "Deliberately slow provider read returns user-facing deadline error within cap.",
+    "actual": "Assertions passed; state=collecting; bookings=0; proposal=none; error='This turn reached its wall-clock limit. Recover any pending operation.'",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_stale_fingerprint",
+    "expected": "Forged fingerprint is rejected.",
+    "actual": "Assertions passed; state=awaiting_approval; bookings=0; proposal=book; error='That approval is stale. Review the current exact ticket.'",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_starter_conversations",
+    "expected": "All three UI prompts extract service, comma INR budget and required facts.",
+    "actual": "Assertions passed; state=choosing; bookings=0; proposal=none; error=None",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_success_requires_approval",
+    "expected": "Selection alone does not book; approved exact ticket completes.",
+    "actual": "Assertions passed; state=completed; bookings=1; proposal=book; error=None",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_time_change_invalidates",
+    "expected": "Time-window edit invalidates old exact approval.",
+    "actual": "Assertions passed; state=choosing; bookings=0; proposal=none; error='That approval is stale. Review the current exact ticket.'",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_timeout_after_success",
+    "expected": "Timeout is reconciled by authoritative status and exactly one booking.",
+    "actual": "Assertions passed; state=completed; bookings=1; proposal=book; error=None",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_timeout_not_booked",
+    "expected": "Authoritative failed timeout produces no booking.",
+    "actual": "Assertions passed; state=choosing; bookings=0; proposal=none; error='Provider did not complete the action: failed'",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_tool_call_cap",
+    "expected": "Ninth tool attempt is rejected by engine cap.",
+    "actual": "Assertions passed; state=awaiting_approval; bookings=0; proposal=book; error=None",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_trace_runs_persist_beyond_snapshot",
+    "expected": "Trace events remain queryable by run ID after reopening SQLite.",
+    "actual": "Assertions passed; state=collecting; bookings=0; proposal=none; error=None",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_unknown_error_blocks",
+    "expected": "Unresolved provider result blocks replacement.",
+    "actual": "Assertions passed; state=blocked; bookings=0; proposal=book; error='Unresolved provider outcome'",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_unknown_exception_has_message",
+    "expected": "Unexpected exception produces sanitized user-facing error.",
+    "actual": "Assertions passed; state=blocked; bookings=0; proposal=none; error='An unexpected local operation failed. Use Recover before trying a replacement.'",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_unsupported_date_does_not_silently_book_tomorrow",
+    "expected": "Unsupported date returns user error without fabricated tomorrow availability.",
+    "actual": "Assertions passed; state=collecting; bookings=0; proposal=none; error='Choose today, tomorrow, this/next week, a weekday or an ISO date.'",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  },
+  {
+    "scenario": "test_wall_time_cap",
+    "expected": "Tool attempt after elapsed wall deadline is rejected.",
+    "actual": "Assertions passed; state=awaiting_approval; bookings=0; proposal=book; error=None",
+    "passed": true,
+    "notes": "Offline stdlib test; isolated temporary SQLite database."
+  }
+]

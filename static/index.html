@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f5f7"><meta name="description" content="A thoughtful local assistant for the little things at home. Review every detail before anything is booked.">
+  <title>Consider it done. — Orange</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='20' fill='%23f26b38'/%3E%3Ccircle cx='32' cy='32' r='17' fill='none' stroke='white' stroke-width='7'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/app.css"><script src="/app.js" defer></script>
+</head>
+<body>
+  <a href="#composer-input" class="skip-link">Skip to your request</a>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Orange home"><span class="brand-mark" aria-hidden="true"></span><span>orange<span class="brand-dot">.</span></span></a>
+    <nav aria-label="Main navigation">
+      <button class="nav-button active" id="home-button">Concierge</button>
+      <button class="nav-button" data-panel="bookings">Your errands <span id="booking-count" class="count" hidden>0</span></button>
+      <button class="nav-button" data-panel="memory">Memory</button>
+    </nav>
+    <button class="activity-button" data-panel="activity"><span class="status-light"></span><span>Activity</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 11h3l2-6 4 11 2-5h3"/></svg></button>
+  </header>
+
+  <main id="main-content">
+    <section class="intro" aria-labelledby="page-title">
+      <div><p class="intro-note">Your home. A little more handled.</p><h1 id="page-title">Consider it done.</h1><p class="intro-copy">Tell us what needs doing. Review the details. Get on with your day.</p></div>
+    </section>
+
+    <section class="workspace" aria-label="Errand concierge">
+      <div class="conversation">
+        <div class="conversation-heading"><div class="assistant-identity"><span class="small-mark" aria-hidden="true"></span><span>Your concierge</span></div><button id="new-errand" class="icon-button" aria-label="Start a new errand" title="New errand"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></div>
+        <div class="conversation-stream">
+        <div id="messages" class="messages" role="log" aria-live="polite" aria-relevant="additions"><div class="message assistant"><p>What can I take off your list?</p></div></div>
+        <div id="suggestions" class="suggestions">
+          <button data-prompt="Find a plumber in Indiranagar this week, mornings only, under ₹1,500."><span class="suggestion-icon" data-icon="plumbing"></span><span>A tap that won’t stop dripping<small>Find a plumber</small></span><span class="suggestion-arrow" aria-hidden="true">↗</span></button>
+          <button data-prompt="Find AC servicing in Indiranagar next week, mornings, under ₹2,000."><span class="suggestion-icon" data-icon="ac"></span><span>A little care for your AC<small>Arrange a service</small></span><span class="suggestion-arrow" aria-hidden="true">↗</span></button>
+          <button data-prompt="Find an electrician in Indiranagar this week, after 10 am, under ₹1,500."><span class="suggestion-icon" data-icon="electrical"></span><span>One less thing on the list<small>Book an electrician</small></span><span class="suggestion-arrow" aria-hidden="true">↗</span></button>
+        </div>
+        <section id="provider-section" class="provider-section" hidden aria-labelledby="provider-title"><div class="section-heading"><div><h2 id="provider-title">Choose a professional.</h2></div><p id="provider-summary"></p></div><div id="providers" class="providers"></div></section>
+        <div id="request-progress" role="status" hidden><span class="progress-orbit" aria-hidden="true"></span><span id="progress-label">Checking your request</span></div>
+        </div>
+        <form id="composer" class="composer"><label class="sr-only" for="composer-input">What needs doing?</label><textarea id="composer-input" rows="1" maxlength="2000" placeholder="What needs doing?" required></textarea><button id="send-button" type="submit" aria-label="Send request"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6"/></svg></button></form>
+        <p class="composer-note" id="composer-note">A plan first. Your approval always.</p>
+      </div>
+
+      <div class="ticket-stage">
+        <div class="stage-heading"><span>Your service ticket</span><span id="ticket-state" class="state-tag">A fresh start</span></div>
+        <article id="ticket" class="ticket" aria-live="polite"></article>
+        <div class="journey" aria-label="Booking progress"><span id="step-request" class="current"><i></i>Request</span><b></b><span id="step-review"><i></i>Review</span><b></b><span id="step-done"><i></i>Done</span></div>
+      </div>
+    </section>
+    <footer class="page-footer"><p><span class="footer-dot"></span>Made for the everyday.</p><button id="demo-button">Explore a recovery scenario <span aria-hidden="true">↗</span></button><span class="local-note">Local demo · Mock providers</span></footer>
+  </main>
+
+  <aside id="side-panel" class="side-panel" hidden aria-labelledby="panel-title"><div class="panel-heading"><div><p class="subtle" id="panel-eyebrow">Behind the scenes</p><h2 id="panel-title">Activity</h2></div><button id="close-panel" class="icon-button" aria-label="Close panel">×</button></div><div id="panel-content"></div></aside>
+  <dialog id="edit-dialog"><form id="edit-form"><div class="dialog-heading"><div><p class="subtle">Make it yours</p><h2>The details.</h2></div><button type="button" class="icon-button" data-close-dialog aria-label="Close details">×</button></div><div class="form-grid"><label>Service<select name="service"><option value="">Choose a service</option><option value="plumbing">Plumbing</option><option value="electrical">Electrical</option><option value="ac">AC servicing</option><option value="cleaning">Home cleaning</option></select></label><label>Area<input name="area" placeholder="e.g. Indiranagar" maxlength="100"></label><label>When<input name="date_range" placeholder="e.g. next week" maxlength="100"></label><label>Time of day<select name="time_window"><option value="any">Any time</option><option value="morning">Morning</option><option value="afternoon">Afternoon</option><option value="evening">Evening</option></select></label><label>Maximum budget (₹)<input name="budget" type="number" min="1" max="100000" step="1" placeholder="1500"></label><label>Not before<input name="earliest_time" type="time"></label></div><p class="form-help">Changing the details replaces any previous approval.</p><button class="primary-button" type="submit">Update my request</button></form></dialog>
+  <dialog id="move-dialog"><form id="move-form"><div class="dialog-heading"><h2>A better time.</h2><button type="button" class="icon-button" data-close-dialog aria-label="Close reschedule">×</button></div><input name="booking_id" type="hidden"><label>New date and time<input name="slot" type="datetime-local" required></label><p class="form-help">You’ll review the exact change before we move anything.</p><button class="primary-button" type="submit">Review new time</button></form></dialog>
+  <div id="toast" class="toast" role="status" hidden></div>
+</body>
+</html>

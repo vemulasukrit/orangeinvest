@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.data/
+.superpowers/
+output/browser-profile/
+output/recordings/
+output/design-page-*.png
+output/narration/
